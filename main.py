@@ -36,6 +36,7 @@ async def check_reg(message: Message, state: FSMContext):
     await state.set_state(MainStates.check_state)
 
     db.db_funcs.create_db(cur, conn)
+
     if db.db_funcs.is_user_registered(message.from_user.id, cur):
         await message.answer(language.main.already_registered, reply_markup=ReplyKeyboardRemove())
         await state.set_state(MainStates.req_state)
